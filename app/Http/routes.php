@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +27,13 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/','PagesController@index');
+    Route::get('/complaint','PagesController@makecomplaint');
+    Route::post('/complaint','PagesController@registercomplaint');
+});
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
 });
